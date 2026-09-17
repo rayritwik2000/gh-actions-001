@@ -8,11 +8,10 @@ env:
 
 jobs:
     Docker build:
+        runs-on: ubuntu-latest
+        env:
+            docker_password: test1234
         steps:
-
-            env:
-                docker_password: test1234
-
             - name: Build image
               run: echo docker build . -t ${{ docker_registry }}/${{ docker_username }}/${{ docker_image }}:latest
             
@@ -23,6 +22,7 @@ jobs:
               run: echo docker push ${{ docker_registry }}/${{ docker_username }}/${{ docker_image }}:latest
 
     Deploy Container:
+        runs-on: ubuntu-latest
         steps:
             - name: Pull image
               run: echo docker pull ${{ docker_registry }}/${{ docker_username }}/${{ docker_image }}:latest

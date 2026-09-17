@@ -7,7 +7,7 @@ env:
     docker_image: github-actions-nginx
 
 jobs:
-    Docker build:
+    Docker_build:
         runs-on: ubuntu-latest
         env:
             docker_password: test1234
@@ -21,7 +21,7 @@ jobs:
             - name: Publish image into Docker registry
               run: echo docker push ${{ env.docker_registry }}/${{ env.docker_username }}/${{ env.docker_image }}:latest
 
-    Deploy Container:
+    Deploy_Container:
         runs-on: ubuntu-latest
         steps:
             - name: Pull image

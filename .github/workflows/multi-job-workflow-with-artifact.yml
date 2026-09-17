@@ -1,0 +1,51 @@
+name: Multi job workflow with Artifact
+on: push
+
+jobs:
+    Build__job__1:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Install dependency
+              run: |
+                sudo chmod +x shellscript_1.sh
+                ./shellscript_1.sh
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v7
+              with:
+                name: dragon-text-file
+                path: dragon.txt
+
+
+    Test__Job__2:
+        needs: Build__job__1
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download Artifact
+              uses: actions/download-artifact@v7
+              with: 
+                name: dragon-text-file
+            
+            - name: List artifact
+              run: ls -ltra
+
+            - name: Run tests
+              run: gerp -i "dragon" dragon.txt
+
+    Deploy__Job__3:
+        needs: Test__Job__2
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download Artifact
+              uses: actions/download-artifact@v7
+              with:
+                name: dragon-text-file
+
+            - name: List artifact
+              run: ls -ltra
+
+            - name: Display the file
+              run: cat dragon.txt
+              
+
+        

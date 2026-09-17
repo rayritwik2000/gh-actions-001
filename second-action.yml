@@ -1,0 +1,15 @@
+name: second workflow
+on: push
+
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+      - name: Print
+        run: echo "Hello from runner"
+      - name: list 
+        run: ls 
+      - name: Red file
+        run: cat README.md

@@ -12,5 +12,5 @@ jobs:
 
             - name: Run the script
               run: |
-                sudo shmod +x shellscript.sh
+                sudo chmod +x shellscript.sh
                 ./shellscript.sh

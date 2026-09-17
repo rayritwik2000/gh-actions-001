@@ -6,11 +6,18 @@ jobs:
         steps:
             - name: Checkout job
               uses: actions/checkout@v7
+
             - name: Install cowsay program
               run: sudo apt-get install cowsay -y
+
             - name: Execute cowsay CMD
               run: cowsay -f dragon " RUN for cover " >>dragon.txt
+            
+            - name: List files
+              run: ls -ltr
+
             - name: Test if the file exists
-              run: grep -i dragon.txt
+              run: grep -i "dragon" dragon.txt
+
             - name: Display the content of dragon.txt
               run: cat drago.txt

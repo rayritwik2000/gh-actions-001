@@ -1,0 +1,37 @@
+name: Concurrency test
+on: workflow_dispatch
+
+env:
+    docker_registry: docker.io
+    docker_username: ritwikray
+    docker_image: github-actions-nginx
+
+jobs:
+    Docker_build:
+        runs-on: ubuntu-latest
+        env:
+            docker_password: test1234
+        steps:
+            - name: Build image
+              run: echo docker build . -t ${{ env.docker_registry }}/${{ env.docker_username }}/${{ env.docker_image }}:latest
+            
+            - name: Docker login
+              run: echo docker login --username=${{ env.docker_username }} --password=${{ env.docker_password }}
+
+            - name: Publish image into Docker registry
+              run: echo docker push ${{ env.docker_registry }}/${{ env.docker_username }}/${{ env.docker_image }}:latest
+
+    Deploy_Container:
+        needs: Docker_build
+        concurrency:
+            group: production-deployment
+            cancel-in-progress: true
+        runs-on: ubuntu-latest
+        steps:
+            - name: Pull image
+              run: echo docker pull ${{ env.docker_registry }}/${{ env.docker_username }}/${{ env.docker_image }}:latest
+            
+            - name: Run the container
+              run: |
+                echo docker run -d -p 8080:80 ${{ env.docker_registry }}/${{ env.docker_username }}/${{ env.docker_image }}:latest
+                sleep 600s

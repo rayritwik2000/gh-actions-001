@@ -4,7 +4,6 @@ on: workflow_dispatch
 env:
     docker_registry=docker.io
     docker_username=ritwikray
-    #docker-password=test1234
     docker_image=github-actions-nginx
 
 jobs:

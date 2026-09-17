@@ -33,7 +33,7 @@ jobs:
               run: ls -ltra
 
             - name: Run tests
-              run: gerp -i "dragon" dragon.txt
+              run: grep -i "dragon" dragon.txt
 
     Deploy__Job__3:
         needs: Test__Job__2

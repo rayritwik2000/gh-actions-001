@@ -1,0 +1,32 @@
+name: Environment Variable 
+on: workflow_dispatch
+
+env:
+    docker_registry=docker.io
+    docker_username=ritwikray
+    #docker-password=test1234
+    docker_image=github-actions-nginx
+
+jobs:
+    Docker build:
+        steps:
+
+            env:
+                docker_password=test1234
+
+            - name: Build image
+              run: echo docker build . -t ${{ docker_registry }}/${{ docker_username }}/${{ docker_image }}:latest
+            
+            - name: Docker login
+              run: echo docker login --username=${{ docker_username }} --password=${{ docker_password }}
+
+            - name: Publish image into Docker registry
+              run: echo docker push ${{ docker_registry }}/${{ docker_username }}/${{ docker_image }}:latest
+
+    Deploy Container:
+        steps:
+            - name: Pull image
+              run: echo docker pull ${{ docker_registry }}/${{ docker_username }}/${{ docker_image }}:latest
+            
+            - name: Run the container
+              run: echo docker run -d -p 8080:80 ${{ docker_registry }}/${{ docker_username }}/${{ docker_image }}:latest

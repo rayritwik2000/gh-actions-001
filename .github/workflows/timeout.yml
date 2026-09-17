@@ -28,11 +28,12 @@ jobs:
             cancel-in-progress: true
         runs-on: ubuntu-latest
         steps:
-            timeout-minutes: 1
+            
             - name: Pull image
               run: echo docker pull ${{ env.docker_registry }}/${{ env.docker_username }}/${{ env.docker_image }}:latest
             
             - name: Run the container
+              timeout-minutes: 1
               run: |
                 echo docker run -d -p 8080:80 ${{ env.docker_registry }}/${{ env.docker_username }}/${{ env.docker_image }}:latest
                 sleep 600s

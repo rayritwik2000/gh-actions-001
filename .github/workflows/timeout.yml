@@ -28,7 +28,7 @@ jobs:
             cancel-in-progress: true
         runs-on: ubuntu-latest
         steps:
-            timeout-minute: 1
+            timeout-minutes: 1
             - name: Pull image
               run: echo docker pull ${{ env.docker_registry }}/${{ env.docker_username }}/${{ env.docker_image }}:latest
             

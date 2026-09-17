@@ -2,16 +2,16 @@ name: Environment Variable
 on: workflow_dispatch
 
 env:
-    docker_registry=docker.io
-    docker_username=ritwikray
-    docker_image=github-actions-nginx
+    docker_registry: docker.io
+    docker_username: ritwikray
+    docker_image: github-actions-nginx
 
 jobs:
     Docker build:
         steps:
 
             env:
-                docker_password=test1234
+                docker_password: test1234
 
             - name: Build image
               run: echo docker build . -t ${{ docker_registry }}/${{ docker_username }}/${{ docker_image }}:latest

@@ -22,6 +22,7 @@ jobs:
               run: echo docker push ${{ env.docker_registry }}/${{ env.docker_username }}/${{ env.docker_image }}:latest
 
     Deploy_Container:
+        needs: Docker_build
         runs-on: ubuntu-latest
         steps:
             - name: Pull image

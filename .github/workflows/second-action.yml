@@ -11,5 +11,7 @@ jobs:
         run: echo "Hello from runner"
       - name: list 
         run: ls 
-      - name: Red file
-        run: cat README.md
+      - name: Read file
+        run: |
+            cat README.md
+            cat second-action.yml

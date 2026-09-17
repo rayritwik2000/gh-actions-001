@@ -1,4 +1,4 @@
-name: Generate ASCII art work
+name: Generate ASCII art work with script
 on: push
 jobs:
     ASCII-job:

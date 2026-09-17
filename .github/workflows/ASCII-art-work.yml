@@ -1,5 +1,5 @@
 name: Generate ASCII art work
-on: push
+on: pushworkflow_dispatch
 jobs:
     ASCII-job:
         runs-on: ubuntu-latest

@@ -1,0 +1,16 @@
+name: Generate ASCII art work
+on: push
+jobs:
+    ASCII-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout job
+              uses: actions/checkout@v7
+
+            - name: List the downloaded files
+              run: ls -ltra
+
+            - name: Run the script
+              run: |
+                sudo shmod +x shellscript.sh
+                ./shellscript.sh
